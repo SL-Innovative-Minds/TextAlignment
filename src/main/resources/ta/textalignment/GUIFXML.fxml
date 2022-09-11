@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ta.textalignment.GUIFXMLController">
+    <children>
+      <Button id="btnClear" fx:id="btnClear" layoutX="23.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
+      <Button id="btnDefault" fx:id="btnDefault" layoutX="208.0" layoutY="366.0" mnemonicParsing="false" onAction="#onDefaultClick" text="Default" />
+      <Button id="btnLoad" fx:id="btnLoad" layoutX="312.0" layoutY="366.0" mnemonicParsing="false" onAction="#onLoadClick" text="Load" />
+      <Button id="btnSave" fx:id="btnSave" layoutX="402.0" layoutY="366.0" mnemonicParsing="false" onAction="#onSaveClick" text="Save" />
+      <Button id="btnExit" fx:id="btnExit" layoutX="618.0" layoutY="366.0" mnemonicParsing="false" onAction="#onExitClick" text="Exit" />
+      <RadioButton id="left" fx:id="left" layoutX="306.0" layoutY="110.0" mnemonicParsing="false" onAction="#onLeftClick" text="Left" />
+      <RadioButton id="right" fx:id="right" layoutX="306.0" layoutY="145.0" mnemonicParsing="false" onAction="#onRightClick" text="Right" />
+      <RadioButton id="centered" fx:id="centered" layoutX="306.0" layoutY="180.0" mnemonicParsing="false" onAction="#onCenteredClick" text="Centered" />
+      <RadioButton id="justified" fx:id="justified" layoutX="306.0" layoutY="215.0" mnemonicParsing="false" onAction="#onJustifiedClick" text="Justified" />
+      <RadioButton id="augment" fx:id="augmented" layoutX="306.0" layoutY="265.0" mnemonicParsing="false" onAction="#onAugmentedClick" text="Augment" />
+      <Label id="alignmentLabel" fx:id="alignmentLabel" layoutX="310.0" layoutY="59.0" text="Alignment" />
+      <Label id="originalLabel" layoutX="111.0" layoutY="300.0" text="Original Text" />
+      <Label id="alignedLabel" layoutX="497.0" layoutY="300.0" text="Aligned Text" />
+      <TextArea id="originalText" fx:id="originalText" layoutX="45.0" layoutY="59.0" prefHeight="224.0" prefWidth="200.0">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font></TextArea>
+      <TextArea id="alignedText" fx:id="alignedText" layoutX="430.0" layoutY="59.0" prefHeight="224.0" prefWidth="200.0">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font></TextArea>
+    </children>
+</AnchorPane>
+
