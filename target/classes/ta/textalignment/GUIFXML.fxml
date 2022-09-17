@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ta.textalignment.GUIFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ta.textalignment.Controller">
     <children>
       <Button id="btnClear" fx:id="btnClear" layoutX="23.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
       <Button id="btnDefault" fx:id="btnDefault" layoutX="208.0" layoutY="366.0" mnemonicParsing="false" onAction="#onDefaultClick" text="Default" />
