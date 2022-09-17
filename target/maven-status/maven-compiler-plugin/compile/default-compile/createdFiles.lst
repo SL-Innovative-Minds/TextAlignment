@@ -1,3 +1,4 @@
 ta\textalignment\App.class
-ta\textalignment\GUIFXMLController.class
 module-info.class
+ta\textalignment\Document.class
+ta\textalignment\Controller.class

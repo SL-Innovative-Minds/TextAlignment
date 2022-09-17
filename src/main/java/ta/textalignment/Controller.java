@@ -47,10 +47,12 @@ public class Controller implements Initializable {
     private TextArea originalText;
     @FXML
     private TextArea alignedText;
+    
+    private Document document;
+    
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ToggleGroup tg = new ToggleGroup();
@@ -62,12 +64,18 @@ public class Controller implements Initializable {
 
     @FXML
     private void onClearClick(ActionEvent event) {
-        System.out.println("clear button invoked");
+        //System.out.println("clear button invoked");
+        originalText.clear();
+        alignedText.clear();
+        setSelected();
     }
 
     @FXML
     private void onDefaultClick(ActionEvent event) {
-        System.out.println("default button invoked");
+        //System.out.println("default button invoked");
+        document = new Document();
+        String unFormattedText = document.getUnformattedText();
+        originalText.setText(unFormattedText);
     }
 
     @FXML
@@ -109,6 +117,14 @@ public class Controller implements Initializable {
     @FXML
     private void onAugmentedClick(ActionEvent event) {
         System.out.println("augmented invoked");
+    }
+
+    private void setSelected() {
+        left.setSelected(false);
+        right.setSelected(false);
+        centered.setSelected(false);
+        justified.setSelected(false);
+        augmented.setSelected(false);
     }
 
 }
