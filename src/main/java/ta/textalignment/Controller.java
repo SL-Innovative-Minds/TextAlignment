@@ -18,7 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 
-public class GUIFXMLController implements Initializable {
+public class Controller implements Initializable {
 
 
     @FXML
