@@ -17,6 +17,8 @@ public class Paragraph {
     private String space = " ";
     private String visibleSpace = "^";
     private String text = "";
+    
+    Controller left;
 
     public Paragraph(AlignmentStrategy strategy) {
         this.strategy = strategy;
@@ -98,12 +100,18 @@ public class Paragraph {
         
         for (String l : lines){
             String element = l.trim();
+            int length = element.length();
             LinkedList<String> elements = new LinkedList<String>();
             for(String s: element.split(" ")){
                 elements.add(s);
+                elements.add(" ");
            }
+            elements.removeLast();
+            if (length <21) 
+            elements.add(" ".repeat(20 - length));
             returnList.add(elements);
         }
+
 
         return returnList;
     }

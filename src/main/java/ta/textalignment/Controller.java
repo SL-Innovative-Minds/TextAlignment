@@ -96,7 +96,11 @@ public class Controller implements Initializable {
 
     @FXML
     private void onLeftClick(ActionEvent event) {
-        System.out.println("left invoked");
+        //System.out.println("left invoked");
+        LeftAligned leftAligned = new LeftAligned();
+        Paragraph paragraph = new Paragraph(leftAligned);
+        paragraph.setText(originalText.getText());
+        alignedText.setText(paragraph.alignText());
     }
 
     @FXML
