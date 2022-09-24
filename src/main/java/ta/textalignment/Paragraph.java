@@ -1,6 +1,5 @@
 /**
- * FXML Controller class
- *
+ * Paragraph class
  * @student name: Diyogu Hannadige Yasith Yuvin Gunawardana
  * @Student Index: 12148175
  *
@@ -8,6 +7,7 @@
 package ta.textalignment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,8 +17,6 @@ public class Paragraph {
     private String space = " ";
     private String visibleSpace = "^";
     private String text = "";
-    
-    Controller left;
 
     public Paragraph(AlignmentStrategy strategy) {
         this.strategy = strategy;
@@ -66,11 +64,12 @@ public class Paragraph {
     
     private List<LinkedList<String>> textToLines(){
         String paragraph = getText();
+        paragraph = paragraph.replace("\n", "");
 
-        LinkedList<String> lines = new LinkedList<String>();
-        List<LinkedList<String>> returnList = new ArrayList<LinkedList<String>>();
+        LinkedList<String> lines = new LinkedList<>();
+        List<LinkedList<String>> returnList = new ArrayList<>();
         List<String> words = new ArrayList<>();
-        LinkedList<String>  line1 = new LinkedList<String>();
+        LinkedList<String>  line1 = new LinkedList<>();
 
         String line = "";
 
@@ -78,12 +77,9 @@ public class Paragraph {
 
         String[] wordsArray = paragraph.split(" ");
 
-        for (int i = 0; i < wordsArray.length; i++) {
-            words.add(wordsArray[i]);
-        }
+        words.addAll(Arrays.asList(wordsArray));
         
         while (j < words.size()) {
-            
            
             line = line + words.get(j) + " ";
             
@@ -95,24 +91,30 @@ public class Paragraph {
                line = "";
                j = j - 1;
             }
-            j++;
+            j++; 
         }
         
         for (String l : lines){
+            
             String element = l.trim();
             int length = element.length();
-            LinkedList<String> elements = new LinkedList<String>();
-            for(String s: element.split(" ")){
-                elements.add(s);
-                elements.add(" ");
-           }
-            elements.removeLast();
-            if (length <21) 
-            elements.add(" ".repeat(20 - length));
+            LinkedList<String> elements = new LinkedList<>();
+            String[] word = element.split(" ");
+            int arraySize = word.length;
+            for (int i = 0; i < arraySize; i++){
+                elements.add(word[i]);
+                if (i != (arraySize -1)){
+                    elements.add(space);
+                }else {
+                    if (length < lineLength){
+                        elements.add(space.repeat(lineLength - length));
+                    }
+                }
+            }
             returnList.add(elements);
         }
 
-
+        //System.out.println(returnList);
         return returnList;
     }
     

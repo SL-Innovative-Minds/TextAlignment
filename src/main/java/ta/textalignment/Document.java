@@ -1,6 +1,5 @@
 /**
- * FXML Controller class
- *
+ * Document class
  * @student name: Diyogu Hannadige Yasith Yuvin Gunawardana
  * @Student Index: 12148175
  *
