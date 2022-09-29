@@ -2,7 +2,6 @@
  * Alignment Strategy class
  * @student name: Diyogu Hannadige Yasith Yuvin Gunawardana
  * @Student Index: 12148175
- *
  */
 package ta.textalignment;
 

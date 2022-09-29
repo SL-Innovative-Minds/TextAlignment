@@ -76,7 +76,6 @@ public class Controller implements Initializable {
     
     @FXML
     private void onClearClick(ActionEvent event) {
-        //System.out.println("clear button invoked");
         originalText.clear();
         alignedText.clear();
         setSelected();
@@ -84,7 +83,6 @@ public class Controller implements Initializable {
 
     @FXML
     private void onDefaultClick(ActionEvent event) {
-        //System.out.println("default button invoked");
         document = new Document();
         String unFormattedText = document.getUnformattedText();
         originalText.setText(unFormattedText);
@@ -93,10 +91,8 @@ public class Controller implements Initializable {
     @FXML
     private void onLoadClick(ActionEvent event)
     {
-        //System.out.println("load button invoked");
         String res = "Give a File Path";
         String filePath = getResponse(res);
-        //System.out.println(filePath);
         try {
         document = new Document(filePath);
         String unFormattedText = document.getUnformattedText();
@@ -125,7 +121,6 @@ public class Controller implements Initializable {
 
     @FXML
     private void onExitClick(ActionEvent event) {
-        System.out.println("Exit");
         System.exit(0);
     }
 
@@ -170,14 +165,19 @@ public class Controller implements Initializable {
 
     @FXML
     private void onJustifiedClick(ActionEvent event) {
-        System.out.println("justified invoked");
+        Justified justified = new Justified();
+        Paragraph paragraph = new Paragraph(justified);
+        paragraph.setText(originalText.getText());
+        if (augmented.isSelected()){
+            alignedText.setText(paragraph.alignAndAugmentedText());
+        }else{
+            alignedText.setText(paragraph.alignText());
+        }
     }
 
     @FXML
     private void onAugmentedClick(ActionEvent event) {
         //System.out.println("augmented invoked");
-        
-        augment = true;
     }
 
     private void setSelected() {

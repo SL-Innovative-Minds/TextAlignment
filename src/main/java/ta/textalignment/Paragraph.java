@@ -51,7 +51,6 @@ public class Paragraph {
         //align each line according to the alignment strategy
         for ( LinkedList<String> line : lines){
             strategy.align( line );
-            System.out.println(line);
         }
         augment(lines);  
         //convert the list of lines back to a string to be returned (so that it can be displayed)
@@ -120,7 +119,6 @@ public class Paragraph {
             LinkedList<String> elements = new LinkedList<>();
             String[] word = element.split(" ");
             int arraySize = word.length;
-            System.out.println(word.length);
             for (int i = 0; i < arraySize; i++){
                 elements.add(word[i]);
                 if (i != (arraySize -1)){
@@ -130,7 +128,6 @@ public class Paragraph {
             returnList.add(elements);
         }
 
-        System.out.println(returnList);
         return returnList;
     }
     
