@@ -20,5 +20,4 @@ public class RightAligned extends AlignmentStrategy {
              line.addFirst(" ".repeat(20 - charCount));
          }
     }
-    
 }

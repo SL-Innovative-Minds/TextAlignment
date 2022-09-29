@@ -6,7 +6,14 @@
 
 package ta.textalignment;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Document {
 
@@ -25,19 +32,32 @@ public class Document {
 
     public Document() {
     }
+    
+    public Document(String fname)throws IOException {
+       
+        final List<String> lines = Files.readAllLines(Paths.get(fname), StandardCharsets.UTF_8);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String line : lines){
+            stringBuilder.append(line);
+            stringBuilder.append("\n");
+        }
+        unformattedText = stringBuilder.toString();
+    }
 
+    public void Save(String fname, String text)throws IOException {
+        
+        File output = new File(fname + ".txt");
+        try (FileWriter writer = new FileWriter(output)) {
+            writer.write(text);
+            writer.flush();
+        }
+    }
+    
     public String setFormattedText() {
         return formattedText;
     }
 
     public String getUnformattedText() {
         return unformattedText;
-    }
-   
-    public Document(String fname)throws IOException {
-    }
-
-    
-    public void Save(String fname)throws IOException {
     }
 }

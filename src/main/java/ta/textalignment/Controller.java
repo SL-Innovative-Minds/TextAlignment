@@ -6,16 +6,26 @@
 
 package ta.textalignment;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
 public class Controller implements Initializable {
@@ -63,7 +73,7 @@ public class Controller implements Initializable {
         centered.setToggleGroup(tg);
         justified.setToggleGroup(tg);
     }
-
+    
     @FXML
     private void onClearClick(ActionEvent event) {
         //System.out.println("clear button invoked");
@@ -81,13 +91,36 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void onLoadClick(ActionEvent event) {
-        System.out.println("load button invoked");
+    private void onLoadClick(ActionEvent event)
+    {
+        //System.out.println("load button invoked");
+        String res = "Give a File Path";
+        String filePath = getResponse(res);
+        //System.out.println(filePath);
+        try {
+        document = new Document(filePath);
+        String unFormattedText = document.getUnformattedText();
+        originalText.setText(unFormattedText);
+        alignedText.clear();
+        } catch (Exception e){
+                displayError(e.getLocalizedMessage());
+        }
     }
 
     @FXML
     private void onSaveClick(ActionEvent event) {
-        System.out.println("save button invoked");
+        if (!alignedText.getText().isEmpty()){
+            String res = "Save as..";
+            String fileName = getResponse(res);
+            document = new Document();
+            try{
+            document.Save(fileName,alignedText.getText());
+            }catch (IOException e){
+                displayError(e.toString());
+            }
+        }else {
+            displayError("Empty Text");
+        }
     }
 
     @FXML
@@ -102,7 +135,7 @@ public class Controller implements Initializable {
         LeftAligned leftAligned = new LeftAligned();
         Paragraph paragraph = new Paragraph(leftAligned);
         paragraph.setText(originalText.getText());
-        if (augment){
+        if (augmented.isSelected()){
             alignedText.setText(paragraph.alignAndAugmentedText());
         }else{
             alignedText.setText(paragraph.alignText());
@@ -115,7 +148,7 @@ public class Controller implements Initializable {
         RightAligned rightAligned = new RightAligned();
         Paragraph paragraph = new Paragraph(rightAligned);
         paragraph.setText(originalText.getText());
-        if (augment){
+        if (augmented.isSelected()){
             alignedText.setText(paragraph.alignAndAugmentedText());
         }else{
             alignedText.setText(paragraph.alignText());
@@ -124,7 +157,15 @@ public class Controller implements Initializable {
 
     @FXML
     private void onCenteredClick(ActionEvent event) {
-        System.out.println("centred invoked");
+        //System.out.println("centred invoked");
+        Centered centerAligned = new Centered();
+        Paragraph paragraph = new Paragraph(centerAligned);
+        paragraph.setText(originalText.getText());
+        if (augmented.isSelected()){
+            alignedText.setText(paragraph.alignAndAugmentedText());
+        }else{
+            alignedText.setText(paragraph.alignText());
+        }
     }
 
     @FXML
@@ -147,4 +188,23 @@ public class Controller implements Initializable {
         augmented.setSelected(false);
     }
 
+    private String getResponse( String title ) throws NoSuchElementException{
+        // Create a new dialog for each load invocation.
+        TextInputDialog lfid = new TextInputDialog();
+        lfid.setTitle( title );
+        lfid.setHeaderText( null );
+        // Block until a response has been provided.
+        Optional<String> result = lfid.showAndWait();
+        if ( !result.isPresent() ) {
+            return "cancelled";
+        }
+        return result.get();
+    }
+    
+    private void displayError( String message ) {
+        Alert a = new Alert(AlertType.ERROR);
+        a.setTitle( "Error" );
+        a.setHeaderText( message );
+        a.showAndWait();
+    }
 }
