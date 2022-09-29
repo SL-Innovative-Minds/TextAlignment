@@ -50,6 +50,8 @@ public class Controller implements Initializable {
     
     private Document document;
     
+    private boolean augment;
+    
     /**
      * Initializes the controller class.
      */
@@ -100,12 +102,24 @@ public class Controller implements Initializable {
         LeftAligned leftAligned = new LeftAligned();
         Paragraph paragraph = new Paragraph(leftAligned);
         paragraph.setText(originalText.getText());
-        alignedText.setText(paragraph.alignText());
+        if (augment){
+            alignedText.setText(paragraph.alignAndAugmentedText());
+        }else{
+            alignedText.setText(paragraph.alignText());
+        }
     }
 
     @FXML
     private void onRightClick(ActionEvent event) {
-        System.out.println("right invoked");
+        //System.out.println("right invoked");
+        RightAligned rightAligned = new RightAligned();
+        Paragraph paragraph = new Paragraph(rightAligned);
+        paragraph.setText(originalText.getText());
+        if (augment){
+            alignedText.setText(paragraph.alignAndAugmentedText());
+        }else{
+            alignedText.setText(paragraph.alignText());
+        }
     }
 
     @FXML
@@ -120,7 +134,9 @@ public class Controller implements Initializable {
 
     @FXML
     private void onAugmentedClick(ActionEvent event) {
-        System.out.println("augmented invoked");
+        //System.out.println("augmented invoked");
+        
+        augment = true;
     }
 
     private void setSelected() {

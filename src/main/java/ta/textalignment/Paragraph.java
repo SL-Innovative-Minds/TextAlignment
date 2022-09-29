@@ -2,14 +2,15 @@
  * Paragraph class
  * @student name: Diyogu Hannadige Yasith Yuvin Gunawardana
  * @Student Index: 12148175
- *
  */
+
 package ta.textalignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Paragraph {
     private AlignmentStrategy strategy;
@@ -20,6 +21,14 @@ public class Paragraph {
 
     public Paragraph(AlignmentStrategy strategy) {
         this.strategy = strategy;
+    }
+    
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
     
     public String alignText(){
@@ -34,21 +43,32 @@ public class Paragraph {
               return linesToText( lines );
 
     }
+    
+    public String alignAndAugmentedText(){
+        //convert the text to list of lines. Each line is a linked list of words and spacing.
+        List<LinkedList<String>> lines = textToLines();
+        
+        //align each line according to the alignment strategy
+        for ( LinkedList<String> line : lines){
+            strategy.align( line );
+            System.out.println(line);
+        }
+        augment(lines);  
+        //convert the list of lines back to a string to be returned (so that it can be displayed)
+        return linesToText( lines );
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
     
-    public void alignAndAugmentText(){
-        
-    }
-    
-    private void augment(List<LinkedList<String>> lines){
-        
+    private void augment( List<LinkedList<String>> lines ) {
+        for ( LinkedList<String> line : lines ) {
+            ListIterator<String> iterator = line.listIterator();
+            while (iterator.hasNext() ) {
+                String s = iterator.next();
+                if ( s.charAt(0) == ' ' )
+                    // replace the current entry
+                    iterator.set( visibleSpace.repeat( s.length() ) );
+            }
+        } 
     }
     
     private String linesToText(List<LinkedList<String>> lines){
@@ -97,26 +117,23 @@ public class Paragraph {
         for (String l : lines){
             
             String element = l.trim();
-            int length = element.length();
             LinkedList<String> elements = new LinkedList<>();
             String[] word = element.split(" ");
             int arraySize = word.length;
+            System.out.println(word.length);
             for (int i = 0; i < arraySize; i++){
                 elements.add(word[i]);
                 if (i != (arraySize -1)){
                     elements.add(space);
-                }else {
-                    if (length < lineLength){
-                        elements.add(space.repeat(lineLength - length));
-                    }
                 }
             }
             returnList.add(elements);
         }
 
-        //System.out.println(returnList);
+        System.out.println(returnList);
         return returnList;
     }
     
-    
+
+
 }
